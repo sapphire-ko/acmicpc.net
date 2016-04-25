@@ -1,0 +1,1 @@
+console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(function(e) { return parseInt(e); }).filter(function(e) { return (e < 100); }).sort(function(a, b) { return a - b; }));

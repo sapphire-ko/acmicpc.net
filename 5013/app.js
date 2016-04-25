@@ -1,0 +1,1 @@
+console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(function(e, i) { return (i === 0 ? null : e); }).filter(function(e) { return e; }).filter(function(e) { return e.match(/CD/) === null; }).length);

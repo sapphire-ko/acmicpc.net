@@ -1,0 +1,1 @@
+console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').filter(function(e, i) { return (i === 0 ? false : e); }).map(function(e, i) { return 'Case #' + (i + 1) + ': ' + e.replace(/\ /, ' + ') + ' = ' + e.split(' ').reduce(function(prev, curr) { return prev + parseInt(curr); }, 0)}).join('\n'));

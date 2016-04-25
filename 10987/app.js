@@ -1,0 +1,1 @@
+console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('').map(function(e) { if(e === 'a' || e === 'e' || e === 'i' || e === 'o' || e === 'u') { return 1; } return 0; }).reduce(function(prev, curr) { return prev + curr; }, 0));

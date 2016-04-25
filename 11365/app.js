@@ -1,0 +1,1 @@
+console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').filter(function(e, i) { return (e !== 'END'); }).map(function(e) { return e.split('').reverse().join(''); }).join('\n'));

@@ -1,0 +1,1 @@
+console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(function(e) { return parseInt(e); }).map(function(e) { return e < 40 ? 40 : e; }).reduce(function(prev, curr) { return prev + curr; }) / 5);

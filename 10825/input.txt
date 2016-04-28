@@ -1,5 +1,7 @@
 12
+Junkya 50 60 100
 Junkyu 50 60 100
+Junkyz 50 60 100
 Sangkeun 80 60 50
 Sunyoung 80 70 100
 Soong 50 60 90

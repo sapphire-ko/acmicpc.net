@@ -1,0 +1,2 @@
+var n = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').filter(function(e, i) { return (i > 0); }).map(function(e) { return e.split(' ').map(function(e) { return parseInt(e); }).filter(function(e) { return (e % 2 === 0); }).sort(function(a, b) { return (a - b); }); });
+console.log(n.map(function(e) { return e.reduce(function(prev, curr) { return prev + curr; }) + ' ' + e[0]; }).join('\n'));

@@ -1,4 +1,37 @@
-var z = { 'UTC': 0, 'GMT': 0, 'BST': 1, 'IST': 1, 'WET': 0, 'WEST': 1, 'CET': 1, 'CEST': 2, 'EET': 2, 'EEST': 3, 'MSK': 3, 'MSD': 4, 'AST': -4, 'ADT': -3, 'NST': -3.5, 'NDT': -2.5, 'EST': -5, 'EDT': -4, 'CST': -6, 'CDT': -5, 'MST': -7, 'MDT': -6, 'PST': -8, 'PDT': -7, 'HST': -10, 'AKST': -9, 'AKDT': -8, 'AEST': +10, 'AEDT': +11, 'ACST': +9.5, 'ACDT': +10.5, 'AWST': +8 };
+var z = {
+  'UTC': 0,
+  'GMT': 0,
+  'BST': 1,
+  'IST': 1,
+  'WET': 0,
+  'WEST': 1,
+  'CET': 1,
+  'CEST': 2,
+  'EET': 2,
+  'EEST': 3,
+  'MSK': 3,
+  'MSD': 4,
+  'AST': -4,
+  'ADT': -3,
+  'NST': -3.5,
+  'NDT': -2.5,
+  'EST': -5,
+  'EDT': -4,
+  'CST': -6,
+  'CDT': -5,
+  'MST': -7,
+  'MDT': -6,
+  'PST': -8,
+  'PDT': -7,
+  'HST': -10,
+  'AKST': -9,
+  'AKDT': -8,
+  'AEST': 10,
+  'AEDT': 11,
+  'ACST': 9.5,
+  'ACDT': 10.5,
+  'AWST': 8
+};
 console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').filter(function(e, i) { return (i > 0); }).map(function(e) {
   var x = e.split(' ');
   var t = x.pop();

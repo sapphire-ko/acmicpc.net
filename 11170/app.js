@@ -1,11 +1,24 @@
-console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').filter(function(e, i) { return (i !== 0); }).map(function(e) { return e.split(' ').map(function(e) { return parseInt(e); }); }).map(function(e) {
+function c(k) {
   var c = 0;
-  for(var i = e[0]; i <= e[1]; ++i) {
-    i.toString().split('').forEach(function(e) {
-      if(e === '0') {
-        ++c;
-      }
-    });
+  var i = 1;
+  while(true) {
+    var b = Math.floor(k / i);
+    var c = (k % i);
+    var a = Math.floor(b / 10);
+    b %=  10;
+
+    if(a === 0) {
+      return c;
+    }
+    if(b === 0) {
+      c += (a - 1) * i + c + 1;
+    }
+    else {
+      c += (a * i);
+    }
+    i *= 10;
   }
-  return c;
-}).join('\n'));
+}
+console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').filter(function(e, i) { return (i > 0); }).map(function(e) { return e.split(' ').map(function(e) { return parseInt(e); }); }).map(function(e) {
+  return c(e[1]);
+}));

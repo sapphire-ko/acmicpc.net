@@ -1,7 +1,6 @@
 var s = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').filter(function(e, i) { return (i !== 0); }).map(function(e) { return e.split(' '); });
 var g = s.reduce(function(prev, curr) { return prev + parseInt(curr[1]); }, 0);
 console.log((Math.round((s.reduce(function(prev, curr) {
-  console.log(curr);
   var x;
   switch(curr[2][0]) {
   case 'A':

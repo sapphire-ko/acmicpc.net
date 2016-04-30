@@ -1,34 +1,27 @@
 #include<cstdio>
 #include<cmath>
-#include<vector>
-
-std::vector<long long> p;
-std::vector<long long> k;
 
 int main() {
   long long a, b;
   scanf("%llu %llu", &a, &b);
   long long i = 2;
-  while(i <= b) {
-    p.push_back(i * i);
-    i += 1;
-  }
+  printf("%llu %llu\n", a, b);
 
+  long long c = 0;
   for(long long i = a; i <= b; ++i) {
-    printf("%llu\n", a);
     bool f = true;
-    for(int j = 0; j < p.size(); ++j) {
-      if(i % p[j] == 0) {
+    for(long long j = 3; j <= std::sqrt(b); j += 2) {
+      if(i % (j * j) == 0) {
         f = false;
         break;
       }
     }
     if(f) {
-      k.push_back(i);
+      ++c;
     }
   }
 
-  printf("%lu\n", k.size());
+  printf("%llu\n", c);
 
   return 0;
 }

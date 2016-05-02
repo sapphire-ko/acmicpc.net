@@ -1,0 +1,1 @@
+console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').filter(function(e, i) { return (i > 0); }).map(function(e) { return (parseInt(e[e.length - 1]) % 2 === 0 ? 'even' : 'odd'); }).join('\n'));

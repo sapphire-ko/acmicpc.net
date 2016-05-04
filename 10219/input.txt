@@ -1,0 +1,9 @@
+2
+3 4
+abbb
+aabb
+aa..
+3 4
+abbb
+aabb
+aa..

@@ -1,0 +1,6 @@
+3
+ftp://acm.baylor.edu:1234/pub/staff/mr-p
+http://www.informatik.uni-ulm.de/acm
+gopher://veryold.edu
+gopher://veryold.edu/
+https://www.acmicpc.net/problem/6324

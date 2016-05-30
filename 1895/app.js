@@ -14,7 +14,9 @@ for(var i = 1; i < n.length - 1; ++i) {
     c.push(n[i + 1][j - 1]);
     c.push(n[i + 1][j - 0]);
     c.push(n[i + 1][j + 1]);
-    if(c.sort(function(a, b) { return (a - b); })[4] >= t) {
+    var x = c.sort(function(a, b) { return (a - b); })[4];
+//    console.log(x);
+    if(x >= t) {
       ++s;
     }
   }

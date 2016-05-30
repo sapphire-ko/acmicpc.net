@@ -3,25 +3,27 @@
 
 class Node {
 public:
-  Node(int _x, int _y) : x(_x), y(_y) {
+  Node(bool _data) : data(_data) {
     u = NULL;
     d = NULL;
     l = NULL;
     r = NULL;
+    visited = false;
   };
-  int x, y;
+  bool data;
   Node *u, *d, *l, *r;
+  bool visited;
 };
 
 void traverse(Node* x) {
-  if(x == NULL) {
+  if(x == NULL || x->visited == true || x->data == false) {
     return;
   }
+  x->visited = true;
   traverse(x->u);
   traverse(x->d);
   traverse(x->l);
   traverse(x->r);
-  x = NULL;
 }
 
 int calc() {
@@ -30,50 +32,42 @@ int calc() {
 
   std::vector<std::vector<Node*> > map;
 
-  int x;
   for(int i = 0; i < m; ++i) {
     map.push_back(std::vector<Node*>());
     for(int j = 0; j < n; ++j) {
-      std::cin >> x;
-
-      if(x == 1) {
-        Node* y = new Node(i, j);
-        map[i].push_back(y);
-
-        if(i == 0) {
-          if(j != 0) {
-            if(map[i][j - 1] != NULL) {
-              y->l = map[i][j - 1];
-              map[i][j - 1]->r = y;
-            }
-          }
-        }
-        else {
-          if(map[i - 1][j] != NULL) {
-            y->u = map[i - 1][j];
-            map[i - 1][j]->d = y;
-          }
-          if(j != 0) {
-            if(map[i][j - 1] != NULL) {
-              y->l = map[i][j - 1];
-              map[i][j - 1]->r = y;
-            }
-          }
-        }
+      Node* x = new Node(false);
+      if(i > 0) {
+        x->u = map[i - 1][j];
+        x->u->d = x;
       }
-      else {
-        map[i].push_back(NULL);
+      if(i < (m - 1)) {
+        x->d = map[i + 1][j];
+        x->d->u = x;
       }
+      if(j > 0) {
+        x->l = map[i][j - 1];
+        x->l->r = x;
+      }
+      if(j < (n - 1)) {
+        x->r = map[i][j + 1];
+        x->r->l = x;
+      }
+      map[i].push_back(x);
     }
+  }
+
+  int x, y;
+  for(int i = 0; i < k; ++i) {
+    std::cin >> x >> y;
+    map[x][y]->data = true;
   }
 
   int c = 0;
   for(int i = 0; i < m; ++i) {
     for(int j = 0; j < n; ++j) {
-      if(map[i][j] != NULL) {
-        Node* x = map[i][j];
-        traverse(map[i][j]);
+      if(map[i][j]->visited == false) {
         ++c;
+        traverse(map[i][j]);
       }
     }
   }

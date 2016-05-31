@@ -40,17 +40,9 @@ int calc() {
         x->u = map[i - 1][j];
         x->u->d = x;
       }
-      if(i < (m - 1)) {
-        x->d = map[i + 1][j];
-        x->d->u = x;
-      }
       if(j > 0) {
         x->l = map[i][j - 1];
         x->l->r = x;
-      }
-      if(j < (n - 1)) {
-        x->r = map[i][j + 1];
-        x->r->l = x;
       }
       map[i].push_back(x);
     }
@@ -65,7 +57,7 @@ int calc() {
   int c = 0;
   for(int i = 0; i < m; ++i) {
     for(int j = 0; j < n; ++j) {
-      if(map[i][j]->visited == false) {
+      if(map[i][j]->visited == false && map[i][j]->data) {
         ++c;
         traverse(map[i][j]);
       }

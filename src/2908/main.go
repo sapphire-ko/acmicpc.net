@@ -1,0 +1,1 @@
+package main;import."fmt";import."strconv";func r(s string)int{k:="";for i:=range s{k+=string(s[len(s)-i-1])};i,_:=Atoi(k);return i};func main(){a,b:="","";Scan(&a,&b);c,d:=r(a),r(b);if d>c{c=d};Println(c)}

@@ -1,0 +1,7 @@
+a,b=sorted(map(int,input().split()))
+print(int((b**2+b)/2))
+print(int((a**2+a)/2))
+print(int(((b**2+b)/2)-(((a)**2+(a))/2)))
+print(a)
+print(int(((b**2+b)/2)-(((a)**2+(a))/2))+a)
+print(int((b*(b+1)-(a-1)*a)/2))

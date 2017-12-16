@@ -10,11 +10,11 @@ if(id === undefined) {
 }
 else {
 	const src = path.resolve(__dirname, '../template');
-	const dest = path.resolve(__dirname, 'src', id);
+	const dest = path.resolve(__dirname, '../src', id);
 
 	fs.stat(dest)
 	.then((stats) => {
-		console.log(`direcory ${id} already exists`);
+		console.log(`directory ${id} already exists`);
 	})
 	.catch((err) => {
 		if(err.code === 'ENOENT') {

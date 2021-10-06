@@ -1,30 +1,38 @@
-'use strict';
+const fs = require('fs-extra');
+const path = require('path');
 
-import fs from 'fs-extra';
-import path from 'path';
+const rootPath = path.resolve(__dirname, '..');
 
-const id = process.argv[2];
+const main = async () => {
+  const id = process.argv[2];
+  if (!id) {
+    throw new Error('problem id is not given');
+  }
+  const src = path.resolve(rootPath, 'template');
+  const dest = path.resolve(rootPath, 'src', id);
 
-if(id === undefined) {
-	console.log('problem id is not given');
-}
-else {
-	const src = path.resolve(__dirname, '../template');
-	const dest = path.resolve(__dirname, '../src', id);
+  try {
+    await fs.lstat(dest);
+    throw new Error(`directory ${id} already exists`);
+  }
+  catch (error) {
+    if (error.code === 'ENOENT') {
+      try {
+        await fs.copy(src, dest);
+      }
+      catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log(erorr);
+    }
+  }
+};
 
-	fs.stat(dest)
-	.then((stats) => {
-		console.log(`directory ${id} already exists`);
-	})
-	.catch((err) => {
-		if(err.code === 'ENOENT') {
-			return fs.copy(src, dest)
-			.catch((err) => {
-				console.log(err);
-			});
-		}
-		else {
-			console.log(err);
-		}
-	});
-}
+(async () => {
+  try {
+    await main();
+  } catch (error) {
+    console.log(error);
+  }
+})();

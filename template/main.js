@@ -1,1 +1,7 @@
-s=require('fs').readFileSync('/dev/stdin')+'';console.log(s[0]- -s[2])
+const fs = require('fs');
+const input = `${fs.readFileSync('/dev/stdin')}`;
+
+const main = () => {
+    console.log('input', input);
+};
+main();

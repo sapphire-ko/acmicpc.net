@@ -2,6 +2,7 @@ const fs = require('fs');
 const input = `${fs.readFileSync('/dev/stdin')}`.trim();
 
 const main = () => {
-    console.log('input', input);
+	const [p, q] = input.split(' ').map(x => BigInt(x));
+	console.log(`${p + q}`);
 };
 main();

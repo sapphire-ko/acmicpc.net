@@ -4,9 +4,9 @@
   "description": "https://www.acmicpc.net/user/sapphire",
   "main": "index.js",
   "scripts": {
-    "make": "cross-env `cross-env NODE_ENV=make babel-node ./config.js` make -C ./binaries",
-    "test": "babel-node ./scripts/test.js $INIT_CWD",
-    "create": "babel-node ./scripts/create.js"
+    "make": "cross-env `cross-env NODE_ENV=make node ./config.js` make -C ./binaries",
+    "test": "node ./scripts/test.js $INIT_CWD",
+    "create": "node ./scripts/create.js"
   },
   "repository": {
     "type": "git",
@@ -19,10 +19,8 @@
   },
   "homepage": "https://github.com/sapphiredev/acmicpc.net#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "bluebird": "^3.5.1",
-    "cross-env": "^5.1.1",
-    "fs-extra": "^5.0.0"
+    "bluebird": "^3.7.2",
+    "cross-env": "^7.0.3",
+    "fs-extra": "^10.0.0"
   }
 }

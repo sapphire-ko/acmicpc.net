@@ -24,7 +24,7 @@ const main = async () => {
         console.log(error);
       }
     } else {
-      console.log(erorr);
+      console.log(error);
     }
   }
 };

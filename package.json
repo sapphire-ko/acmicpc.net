@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "make": "cross-env `cross-env NODE_ENV=make node ./config.js` make -C ./binaries",
-    "test": "node ./scripts/test.js $INIT_CWD",
+    "test": "./scripts/test.sh",
     "create": "node ./scripts/create.js"
   },
   "repository": {

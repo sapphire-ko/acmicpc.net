@@ -173,5 +173,3 @@ data
 dist
 download
 env.json
-
-*.tar.gz

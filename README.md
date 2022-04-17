@@ -1,26 +1,13 @@
 # acmicpc.net
 
-[https://www.acmicpc.net/user/sapphire](https://www.acmicpc.net/user/sapphire)
-
-## Versions
-
-Compiler versions and commands are specified on `./config.js`
-
-## Prerequisites
+## create
 
 ```sh
-$ npm run make
+$ bash scripts/create.sh
 ```
 
-## Create
+## test
 
 ```sh
-$ npm run create 1000
-```
-
-## Test
-
-```sh
-$ cd src/1000
-$ npm run test
+$ bash scripts/test.sh
 ```

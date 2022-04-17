@@ -1,7 +1,11 @@
-const fs = require('fs');
-const input = `${fs.readFileSync('/dev/stdin')}`.trim();
+const read = () => {
+	const fs = require('fs');
+	const input = fs.readFileSync('/dev/stdin').toString().trim();
+	return input;
+};
 
 const main = () => {
-    console.log('input', input);
+	const input = read();
+	console.log('input', input);
 };
 main();

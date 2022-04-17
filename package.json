@@ -2,25 +2,13 @@
   "name": "acmicpc.net",
   "version": "1.0.0",
   "description": "https://www.acmicpc.net/user/sapphire",
-  "main": "index.js",
-  "scripts": {
-    "make": "cross-env `cross-env NODE_ENV=make node ./config.js` make -C ./binaries",
-    "test": "./scripts/test.sh",
-    "create": "node ./scripts/create.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sapphiredev/acmicpc.net.git"
+    "url": "git+https://github.com/sapphire-sh/acmicpc.net.git"
   },
   "author": "sapphire",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sapphiredev/acmicpc.net/issues"
+    "url": "https://github.com/sapphire-sh/acmicpc.net/issues"
   },
-  "homepage": "https://github.com/sapphiredev/acmicpc.net#readme",
-  "devDependencies": {
-    "bluebird": "^3.7.2",
-    "cross-env": "^7.0.3",
-    "fs-extra": "^10.0.0"
-  }
+  "homepage": "https://github.com/sapphire-sh/acmicpc.net#readme"
 }

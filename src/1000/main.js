@@ -1,1 +1,1 @@
-process.stdin.on('data',function(c){console.log(c[0]+c[2]-96)})
+process.stdin.on('data',c=>console.log(c[0]+c[2]-96))

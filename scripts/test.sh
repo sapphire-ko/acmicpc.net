@@ -13,6 +13,12 @@ function fn1 {
 
 		node --stack-size=65536 "$SOURCE_FILE" < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
 
+		echo "===="
+
+		cat "$OUTPUT_TMP_FILE"
+
+		echo "===="
+
 		diff "$OUTPUT_FILE" "$OUTPUT_TMP_FILE"
 
 		rm "$OUTPUT_TMP_FILE"
@@ -29,6 +35,12 @@ function fn2 {
 		OUTPUT_TMP_FILE="output.tmp.txt"
 
 		python "$SOURCE_FILE" < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
+
+		echo "===="
+
+		cat "$OUTPUT_TMP_FILE"
+
+		echo "===="
 
 		diff "$OUTPUT_FILE" "$OUTPUT_TMP_FILE"
 

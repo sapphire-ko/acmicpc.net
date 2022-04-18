@@ -1,11 +1,19 @@
-const read = () => {
-	const fs = require('fs');
-	const input = fs.readFileSync('/dev/stdin').toString().trim();
-	return input;
-};
+(() => {
+	const readline = require('readline');
+	const rl = readline.createInterface({
+		input: process.stdin,
+		output: process.stdout,
+	});
+	const buffer = [];
+	rl.on('line', (line) => {
+		buffer.push(line);
+	});
+	rl.on('close', () => {
+		const input = buffer;
+		main(input);
+	});
+})();
 
-const main = () => {
-	const input = read();
-	console.log('input', input);
+const main = (input) => {
+
 };
-main();

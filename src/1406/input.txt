@@ -1,16 +1,13 @@
-abcd
-3
+dmih
+11
+B
+B
 P x
 L
+B
+B
+B
 P y
-L
-L
-L
-L
 D
-P d
-P d
-B
-B
-B
-B
+D
+P z

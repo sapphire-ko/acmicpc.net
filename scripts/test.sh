@@ -48,9 +48,39 @@ function fn2 {
 	'
 }
 
-if [ -z "$1" ];
-then
-	fn1
-else
-	fn2
-fi
+function fn3 {
+	read -p "enter problem id: " ID
+
+	docker run --rm -it -v $PWD/src/$ID:/opt/proj -w /opt/proj rust:1.60.0 /bin/bash -c '
+		SOURCE_FILE="main.rs"
+		INPUT_FILE="input.txt"
+		OUTPUT_FILE="output.txt"
+		OUTPUT_TMP_FILE="output.tmp.txt"
+
+		rustc --edition 2021 -O -o main main.rs
+
+		./main < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
+
+		echo "===="
+
+		cat "$OUTPUT_TMP_FILE"
+
+		echo "===="
+
+		diff "$OUTPUT_FILE" "$OUTPUT_TMP_FILE"
+
+		rm "$OUTPUT_TMP_FILE"
+	'
+}
+
+case "x$1" in
+	"x")
+		fn1
+		;;
+	"xpython")
+		fn2
+		;;
+	"xrust")
+		fn3
+		;;
+esac

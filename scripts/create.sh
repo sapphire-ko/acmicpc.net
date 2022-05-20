@@ -12,14 +12,14 @@ function create_node {
 function create_python {
 	ID="$1"
 
-	cp -r "./template/" "./src/$ID"
+	cp -r "./template/main.py" "./src/$ID"
 	code "./src/$ID/"{main.py,input.txt,output.txt}
 }
 
 function create_rust {
 	ID="$1"
 
-	cp -r "./template/" "./src/$ID"
+	cp -r "./template/main.rs" "./src/$ID"
 	code "./src/$ID/"{main.rs,input.txt,output.txt}
 }
 

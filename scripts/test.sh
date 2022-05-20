@@ -48,6 +48,10 @@ function test_rust {
 	ID="$1"
 
 	docker run --rm -it -v "$PWD/src/$1:/opt/proj" -w /opt/proj rust:1.60.0 /bin/bash -c '
+		#!/bin/bash
+
+		set -ex
+
 		SOURCE_FILE="main.rs"
 		EXECUTABLE_FILE="main"
 		INPUT_FILE="input.txt"

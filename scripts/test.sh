@@ -2,10 +2,8 @@
 
 set -ex
 
-function fn1 {
-	read -p "enter problem id: " ID
-
-	docker run --rm -it -v $PWD/src/$ID:/opt/proj -w /opt/proj node:16.13.1 /bin/bash -c '
+function test_node {
+	docker run --rm -it -v "$PWD/src/$1:/opt/proj" -w /opt/proj node:16.13.1 /bin/bash -c '
 		SOURCE_FILE="main.js"
 		INPUT_FILE="input.txt"
 		OUTPUT_FILE="output.txt"
@@ -25,10 +23,8 @@ function fn1 {
 	'
 }
 
-function fn2 {
-	read -p "enter problem id: " ID
-
-	docker run --rm -it -v $PWD/src/$ID:/opt/proj -w /opt/proj python:3.10.4 /bin/bash -c '
+function test_python {
+	docker run --rm -it -v "$PWD/src/$1:/opt/proj" -w /opt/proj python:3.10.4 /bin/bash -c '
 		SOURCE_FILE="main.py"
 		INPUT_FILE="input.txt"
 		OUTPUT_FILE="output.txt"
@@ -48,10 +44,10 @@ function fn2 {
 	'
 }
 
-function fn3 {
-	read -p "enter problem id: " ID
+function test_rust {
+	ID="$1"
 
-	docker run --rm -it -v $PWD/src/$ID:/opt/proj -w /opt/proj rust:1.60.0 /bin/bash -c '
+	docker run --rm -it -v "$PWD/src/$1:/opt/proj" -w /opt/proj rust:1.60.0 /bin/bash -c '
 		SOURCE_FILE="main.rs"
 		EXECUTABLE_FILE="main"
 		INPUT_FILE="input.txt"
@@ -74,14 +70,20 @@ function fn3 {
 	'
 }
 
-case "x$1" in
+function main {
+	TYPE="$1"
+	read -p "enter problem id: " ID
+
+	case "x$TYPE" in
 	"x")
-		fn1
+		test_node "$ID"
 		;;
 	"xpython")
-		fn2
+		test_python "$ID"
 		;;
 	"xrust")
-		fn3
+		test_rust "$ID"
 		;;
-esac
+	esac
+}
+main "$1"

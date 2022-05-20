@@ -53,13 +53,14 @@ function fn3 {
 
 	docker run --rm -it -v $PWD/src/$ID:/opt/proj -w /opt/proj rust:1.60.0 /bin/bash -c '
 		SOURCE_FILE="main.rs"
+		EXECUTABLE_FILE="main"
 		INPUT_FILE="input.txt"
 		OUTPUT_FILE="output.txt"
 		OUTPUT_TMP_FILE="output.tmp.txt"
 
-		rustc --edition 2021 -O -o main main.rs
+		rustc --edition 2021 -O -o "$EXECUTABLE_FILE" "$SOURCE_FILE"
 
-		./main < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
+		./"$EXECUTABLE_FILE" < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
 
 		echo "===="
 
@@ -69,7 +70,7 @@ function fn3 {
 
 		diff "$OUTPUT_FILE" "$OUTPUT_TMP_FILE"
 
-		rm "$OUTPUT_TMP_FILE"
+		rm "$OUTPUT_TMP_FILE" "$EXECUTABLE_FILE"
 	'
 }
 

@@ -9,6 +9,13 @@ function create_node {
 	code "./src/$ID/"{main.js,input.txt,output.txt}
 }
 
+function create_typescript {
+	ID="$1"
+
+	cp -r "./template/main.ts" "./src/$ID"
+	code "./src/$ID/"{main.ts,input.txt,output.txt}
+}
+
 function create_python {
 	ID="$1"
 
@@ -30,6 +37,9 @@ function main {
 	case "x$TYPE" in
 	"x")
 		create_node "$ID"
+		;;
+	"xts")
+		create_typescript "$ID"
 		;;
 	"xpython")
 		create_python "$ID"

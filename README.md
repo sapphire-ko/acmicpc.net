@@ -3,11 +3,11 @@
 ## create
 
 ```sh
-$ bash scripts/create.sh
+$ npm start # 1000
 ```
 
 ## test
 
 ```sh
-$ bash scripts/test.sh
+$ npm test # 1000
 ```

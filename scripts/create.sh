@@ -2,55 +2,33 @@
 
 set -ex
 
-function create_node {
-	ID="$1"
-
-	mkdir -p "./src/${ID}"
-	cp "./template/"{main.js,input.txt,output.txt} "./src/$ID"
-	code "./src/$ID/"{main.js,input.txt,output.txt}
-}
-
-function create_typescript {
-	ID="$1"
-
-	mkdir -p "./src/${ID}"
-	cp "./template/main.ts" "./src/$ID"
-	code "./src/$ID/"{main.ts,input.txt,output.txt}
-}
-
-function create_python {
-	ID="$1"
-
-	mkdir -p "./src/${ID}"
-	cp "./template/main.py" "./src/$ID"
-	code "./src/$ID/"{main.py,input.txt,output.txt}
-}
-
-function create_rust {
-	ID="$1"
-
-	mkdir -p "./src/${ID}"
-	cp "./template/main.rs" "./src/$ID"
-	code "./src/$ID/"{main.rs,input.txt,output.txt}
-}
-
 function main {
 	TYPE="$1"
+
 	read -p "enter problem id: " ID
+
+	mkdir -p "./src/${ID}"
+	mkdir -p "./src/${ID}/data"
 
 	case "x$TYPE" in
 	"x")
-		create_node "$ID"
+		FILENAME="main.js"
 		;;
 	"xts")
-		create_typescript "$ID"
+		FILENAME="main.ts"
 		;;
 	"xpython")
-		create_python "$ID"
+		FILENAME="main.py"
 		;;
 	"xrust")
-		create_rust "$ID"
+		FILENAME="main.rs"
 		;;
 	esac
+
+	cp "./template/$FILENAME" "./src/$ID"
+	code "./src/$ID/$FILENAME"
+
+	node -r @swc-node/register "./scripts/src/create.ts" "$ID"
+
 }
 main "$1"

@@ -3,11 +3,14 @@
 set -ex
 
 function test_node {
-	docker run --rm -it -v "$PWD/src/$1:/opt/proj" -w /opt/proj node:16.13.1 /bin/bash -c '
+	ID="$1"
+	NUMBER="$2"
+
+	docker run --rm -it -v "$PWD/src/$ID:/opt/proj" -w /opt/proj --env NUMBER="$NUMBER" node:16.13.1 /bin/bash -c '
 		SOURCE_FILE="main.js"
-		INPUT_FILE="input.txt"
-		OUTPUT_FILE="output.txt"
-		OUTPUT_TMP_FILE="output.tmp.txt"
+		INPUT_FILE="data/input.$NUMBER.txt"
+		OUTPUT_FILE="data/output.$NUMBER.txt"
+		OUTPUT_TMP_FILE="data/output.$NUMBER.tmp.txt"
 
 		node --stack-size=65536 "$SOURCE_FILE" < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
 
@@ -24,11 +27,14 @@ function test_node {
 }
 
 function test_python {
-	docker run --rm -it -v "$PWD/src/$1:/opt/proj" -w /opt/proj python:3.10.4 /bin/bash -c '
+	ID="$1"
+	NUMBER="$2"
+
+	docker run --rm -it -v "$PWD/src/$ID:/opt/proj" -w /opt/proj --env NUMBER="$NUMBER" python:3.10.4 /bin/bash -c '
 		SOURCE_FILE="main.py"
-		INPUT_FILE="input.txt"
-		OUTPUT_FILE="output.txt"
-		OUTPUT_TMP_FILE="output.tmp.txt"
+		INPUT_FILE="data/input.$NUMBER.txt"
+		OUTPUT_FILE="data/output.$NUMBER.txt"
+		OUTPUT_TMP_FILE="data/output.$NUMBER.tmp.txt"
 
 		python "$SOURCE_FILE" < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
 
@@ -46,13 +52,14 @@ function test_python {
 
 function test_rust {
 	ID="$1"
+	NUMBER="$2"
 
-	docker run --rm -it -v "$PWD/src/$1:/opt/proj" -w /opt/proj rust:1.60.0 /bin/bash -c '
+	docker run --rm -it -v "$PWD/src/$ID:/opt/proj" -w /opt/proj --env NUMBER="$NUMBER" rust:1.60.0 /bin/bash -c '
 		SOURCE_FILE="main.rs"
 		EXECUTABLE_FILE="main"
-		INPUT_FILE="input.txt"
-		OUTPUT_FILE="output.txt"
-		OUTPUT_TMP_FILE="output.tmp.txt"
+		INPUT_FILE="data/input.$NUMBER.txt"
+		OUTPUT_FILE="data/output.$NUMBER.txt"
+		OUTPUT_TMP_FILE="data/output.$NUMBER.tmp.txt"
 
 		rustc --edition 2021 -O -o "$EXECUTABLE_FILE" "$SOURCE_FILE"
 
@@ -72,18 +79,25 @@ function test_rust {
 
 function main {
 	TYPE="$1"
+
 	read -p "enter problem id: " ID
 
-	case "x$TYPE" in
-	"x")
-		test_node "$ID"
-		;;
-	"xpython")
-		test_python "$ID"
-		;;
-	"xrust")
-		test_rust "$ID"
-		;;
-	esac
+	for f in $(ls ./src/$ID/data/input.*.txt); do
+		temp=$(basename "$f")
+		temp="${temp%.txt}"
+		NUMBER="${temp#input.}"
+
+		case "x$TYPE" in
+		"x")
+			test_node "$ID" "$NUMBER"
+			;;
+		"xpython")
+			test_python "$ID" "$NUMBER"
+			;;
+		"xrust")
+			test_rust "$ID" "$NUMBER"
+			;;
+		esac
+	done
 }
 main "$1"

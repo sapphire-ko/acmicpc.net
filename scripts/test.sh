@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 function test_node {
 	ID="$1"
@@ -14,11 +14,9 @@ function test_node {
 
 		node --stack-size=65536 "$SOURCE_FILE" < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
 
-		echo "===="
-
 		cat "$OUTPUT_TMP_FILE"
 
-		echo "===="
+		echo "----"
 
 		diff "$OUTPUT_FILE" "$OUTPUT_TMP_FILE"
 
@@ -38,11 +36,9 @@ function test_python {
 
 		python "$SOURCE_FILE" < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
 
-		echo "===="
-
 		cat "$OUTPUT_TMP_FILE"
 
-		echo "===="
+		echo "----"
 
 		diff "$OUTPUT_FILE" "$OUTPUT_TMP_FILE"
 
@@ -65,11 +61,9 @@ function test_rust {
 
 		./"$EXECUTABLE_FILE" < "$INPUT_FILE" > "$OUTPUT_TMP_FILE"
 
-		echo "===="
-
 		cat "$OUTPUT_TMP_FILE"
 
-		echo "===="
+		echo "----"
 
 		diff "$OUTPUT_FILE" "$OUTPUT_TMP_FILE"
 
@@ -82,10 +76,14 @@ function main {
 
 	read -p "enter problem id: " ID
 
+	echo "$ID"
+
 	for f in $(ls ./src/$ID/data/input.*.txt); do
 		temp=$(basename "$f")
 		temp="${temp%.txt}"
 		NUMBER="${temp#input.}"
+
+		echo "==== $NUMBER ===="
 
 		case "x$TYPE" in
 		"x")

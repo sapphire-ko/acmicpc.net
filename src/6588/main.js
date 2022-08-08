@@ -2,7 +2,6 @@
 	const readline = require('readline');
 	const rl = readline.createInterface({
 		input: process.stdin,
-		output: process.stdout,
 	});
 	const buffer = [];
 	rl.on('line', (line) => {
@@ -10,68 +9,38 @@
 	});
 	rl.on('close', () => {
 		buffer.pop();
-		const input = buffer;
+		const input = buffer.map(Number);
 		main(input);
 	});
 })();
 
-const a = [
-	'3',
-	'5',
-	'7',
-	'11',
-	'13',
-	'17',
-	'19',
-	'23',
-	'29',
-	'31',
-	'37',
-	'41',
-	'43',
-	'47',
-	'53',
-	'59',
-	'61',
-	'67',
-	'71',
-	'73',
-	'79',
-	'83',
-	'89',
-	'97',
-];
-const b = {};
+const main = (input) => {
+	const LENGTH = 1_000_000;
+	const p = Array.from(new Array(LENGTH)).fill(true);
+	p[0] = false;
+	p[1] = false;
 
-const fn = (x) => {
-	for (let i = 3; i < x; i += 2) {
-		const p = a.every((x) => i % x !== 0);
-		if (p) {
-			a.push(i);
+	const q = {};
+	for (let i = 2; i < LENGTH; ++i) {
+		if (p[i]) {
+			q[i] = i;
+		}
+		for (let j = 1; i * j < LENGTH; ++j) {
+			p[i * j] = false;
 		}
 	}
-	for (let x of a) {
-		b[x] = true;
-	}
-};
+	const r = Object.values(q);
 
-const main = (input) => {
-	let p = -1;
-	for (const x of input) {
-		p = Math.max(p, x);
-	}
-	fn(p);
-	// console.log(a, b);
 	const k = [];
+
 	for (const x of input) {
-		for (let i = 0; i < a.length; ++i) {
-			const p = a[i];
-			const q = x - p;
-			if (b[q]) {
-				k.push(`${x} = ${p} + ${q}`);
+		for (const s of r) {
+			const t = x - s;
+			if (q[t]) {
+				k.push([s, t]);
 				break;
 			}
 		}
 	}
-	console.log(k.join('\n'));
+	console.log(k.map(([p, q]) => `${p + q} = ${p} + ${q}`).join('\n'));
 };

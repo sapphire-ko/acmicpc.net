@@ -1,1 +1,1 @@
-s=require('fs').readFileSync('/dev/stdin');console.log(s[0]-s[2])
+process.stdin.on('data',c=>console.log(c[0]-c[2]))
